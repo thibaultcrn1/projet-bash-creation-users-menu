@@ -13,6 +13,6 @@ do
     echo "Le groupe $login est créé"
     sudo useradd -c "$prenom $nom" -d /home/$login -s /bin/bash $login
     sudo chpasswd $login $password
+    sudo chage $login
  
-
 done < "./bd_util.csv"
