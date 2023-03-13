@@ -3,11 +3,16 @@
 while IFS=, read -r nom prenom dateNaissance profession
 do
 
-    login = $prenom | cut -c1
+    login=$(echo ${nom:0:1}$prenom | tr '[:upper:]' '[:lower:]')
+    password=$(echo ${dateNaissance:0:3}$prenom | tr '[:upper:]' '[:lower:]')
 
-    echo $nom
-    echo $prenom
-    echo $dateNaissance
-    echo $profession
-    echo
+    echo $login
+    echo $password
+
+    sudo groupadd $login
+    echo "Le groupe $login est créé"
+    sudo useradd -c "$prenom $nom" -d /home/$login -s /bin/bash $login
+    sudo chpasswd $login $password
+ 
+
 done < "./bd_util.csv"
