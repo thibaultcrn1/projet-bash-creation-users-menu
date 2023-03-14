@@ -3,8 +3,8 @@
 while IFS=, read -r nom prenom dateNaissance profession
 do
 
-    login=$(echo ${nom:0:1}$prenom | tr '[:upper:]' '[:lower:]')
-    password=$(echo ${dateNaissance:0:3}$prenom | tr '[:upper:]' '[:lower:]')
+    login=$(echo $(nom:0:1)$prenom | tr '[:upper:]' '[:lower:]')
+    password=$(echo $(dateNaissance:0:3)$prenom | tr '[:upper:]' '[:lower:]')
 
     echo $login
     echo $password
