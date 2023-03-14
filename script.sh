@@ -9,10 +9,10 @@ do
     echo $login
     echo $password
 
-    sudo groupadd $login
-    echo "Le groupe $login est créé"
-    sudo useradd -c "$prenom $nom" -d /home/$login -s /bin/bash $login
-    sudo chpasswd $login $password
-    sudo chage $login
+    # sudo groupadd $login
+    # echo "Le groupe $login est créé"
+    # sudo useradd -c "$prenom $nom" -d /home/$login -s /bin/bash $login
+    # sudo echo "$login:$password" | chpasswd
+    # sudo chage -d0 $login
  
 done < "./bd_util.csv"
