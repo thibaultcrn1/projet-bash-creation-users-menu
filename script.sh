@@ -1,18 +1,20 @@
-#!/bin/sh
+#!/bin/bash
 
 while IFS=, read -r nom prenom dateNaissance profession
 do
 
     login=$(echo "${nom:0:1}""$prenom" | tr '[:upper:]' '[:lower:]')
-    password=$(echo "${dateNaissance:0:4}"$prenom | tr '[:upper:]' '[:lower:]')
+    utilisateur=$(echo "${login}" | tr '[:upper:]' '[:lower:]')
+    mdp=$(echo "${dateNaissance:0:4}$prenom" | tr '[:upper:]' '[:lower:]')
+    groupe=$(echo "${profession}" | tr '[:upper:]' '[:lower:]')
 
-    echo $login
-    echo $password
-
-    # sudo groupadd $login
-    # echo "Le groupe $login est créé"
-    # sudo useradd -c "$prenom $nom" -d /home/$login -s /bin/bash -p $password -G $login $login
-    # sudo echo "$login:$password" | chpasswd
-    # sudo chage -d0 $login
+    sudo groupadd $groupe
+    echo "Le groupe $groupe est créé"
+    sudo useradd -m -s /bin/bash -G "$groupe" -c "$prenom $nom" -p "$(openssl passwd -1 "$mdp")" "$utilisateur"
+    echo "L'utilisateur $utilisateur est créé"
+    sudo chage -d 0 $utilisateur
  
 done < "./bd_util.csv"
+
+echo
+echo "Script de création exécuté avec succès."
