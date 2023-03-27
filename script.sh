@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 while IFS=, read -r nom prenom dateNaissance profession
 do
