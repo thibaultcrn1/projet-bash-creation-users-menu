@@ -4,7 +4,7 @@ while IFS=, read -r nom prenom dateNaissance profession
 do
 
     login=$(echo "${nom:0:1}""$prenom" | tr '[:upper:]' '[:lower:]')
-    utilisateur=$(echo "${login}" | tr '[:upper:]' '[:lower:]')
+    utilisateur="$login"
     mdp=$(echo "${dateNaissance:0:4}$prenom" | tr '[:upper:]' '[:lower:]')
     groupe=$(echo "${profession}" | tr '[:upper:]' '[:lower:]')
 
