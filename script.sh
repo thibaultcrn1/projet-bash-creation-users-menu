@@ -10,7 +10,7 @@ do
 
     sudo groupadd "$groupe"
     echo "Le groupe $groupe est créé"
-    sudo useradd -m -s /bin/bash -G "$groupe" -c "$prenom $nom" -p "$(openssl passwd -1 "$mdp")" "$utilisateur"
+    sudo useradd -m -s /bin/bash -g "$groupe" -c "$prenom $nom" -p "$(openssl passwd -1 "$mdp")" "$utilisateur"
     echo "L'utilisateur $utilisateur est créé"
     sudo chage -d 0 "$utilisateur"
  
